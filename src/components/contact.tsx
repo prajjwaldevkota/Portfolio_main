@@ -133,7 +133,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-muted/30">
+    <section id="contact" className="py-24 bg-white dark:bg-transparent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-sm font-medium text-primary mb-2 tracking-wider uppercase">

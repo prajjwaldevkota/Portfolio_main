@@ -90,10 +90,10 @@ const GlassCard = React.forwardRef<
     viewport={{ once: true, amount: 0.2 }}
     transition={{ duration: 0.6, ease: "easeOut" }}
     className={cn(
-      // Enhanced glassmorphism styles with better dark mode support
-      "rounded-2xl border border-white/20 bg-white/60 backdrop-blur-xl shadow-2xl overflow-hidden",
+      // Enhanced glassmorphism styles with proper light/dark mode
+      "rounded-2xl border border-white/20 bg-white/90 backdrop-blur-xl shadow-2xl overflow-hidden",
       "dark:border-white/10 dark:bg-black/40 dark:shadow-black/20",
-      "hover:border-white/30 hover:bg-white/70 dark:hover:border-white/20 dark:hover:bg-black/50",
+      "hover:border-white/30 hover:bg-white/95 dark:hover:border-white/20 dark:hover:bg-black/50",
       "transition-all duration-300",
       className
     )}

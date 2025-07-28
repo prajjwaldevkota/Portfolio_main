@@ -1,3 +1,4 @@
+"use client"
 import { GlassCard, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -35,7 +36,7 @@ export function Projects() {
   ]
 
   return (
-    <section id="projects" className="py-24">
+    <section id="projects" className="py-24 bg-white dark:bg-transparent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-sm font-medium text-primary mb-2 tracking-wider uppercase">Portfolio</p>
@@ -77,20 +78,11 @@ export function Projects() {
                   ))}
                 </div>
                 <div className="flex gap-3">
-                  <Button 
-                    size="sm" 
-                    className="flex-1 rounded-full"
-                    onClick={() => window.open(project.liveUrl, '_blank')}
-                  >
+                  <Button size="sm" className="flex-1 rounded-full" onClick={() => window.open(project.liveUrl, '_blank')}>
                     <ExternalLink className="h-3 w-3 mr-2" />
                     Live Demo
                   </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline" 
-                    className="flex-1 rounded-full bg-transparent"
-                    onClick={() => window.open(project.githubUrl, '_blank')}
-                  >
+                  <Button size="sm" variant="outline" className="flex-1 rounded-full bg-transparent" onClick={() => window.open(project.githubUrl, '_blank')}>
                     <Github className="h-3 w-3 mr-2" />
                     Code
                   </Button>

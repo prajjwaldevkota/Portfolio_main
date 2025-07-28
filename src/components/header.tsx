@@ -39,11 +39,11 @@ export function Header() {
       {/* Subtle animated gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-violet-500/5 via-transparent to-blue-500/5 animate-pulse opacity-50" />
       
-      <div className="container mx-auto px-3 sm:px-4 lg:px-8 relative">
-        <div className="flex justify-between items-center py-3 sm:py-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="flex justify-between items-center py-4">
           <Link 
             href="/" 
-            className="text-lg sm:text-xl font-bold tracking-tight bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent hover:from-violet-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 dark:from-violet-400 dark:to-blue-400"
+            className="text-xl font-bold tracking-tight bg-gradient-to-r from-violet-600 to-blue-600 bg-clip-text text-transparent hover:from-violet-500 hover:to-blue-500 transition-all duration-300 hover:scale-105 dark:from-violet-400 dark:to-blue-400"
           >
             Prajjwal Devkota
           </Link>
@@ -75,19 +75,17 @@ export function Header() {
             </div>
           </nav>
 
-          {/* Mobile Menu Controls */}
-          <div className="md:hidden flex items-center space-x-2">
-            <div className="p-0.5 rounded-md bg-white/5 backdrop-blur-sm border border-white/10 dark:bg-white/5 dark:border-white/10">
-              <div className="w-8 h-8 flex items-center justify-center">
-                <ThemeToggle />
-              </div>
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center space-x-3">
+            <div className="p-1 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 dark:bg-white/5 dark:border-white/10">
+              <ThemeToggle />
             </div>
             <Button 
               variant="ghost" 
-              size="sm"
+              size="icon" 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={cn(
-                "relative w-8 h-8 p-0 bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20",
+                "relative bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20",
                 "dark:bg-white/5 dark:border-white/10 dark:hover:bg-white/10",
                 "transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-violet-500/20",
                 "dark:hover:shadow-violet-500/10",
@@ -96,9 +94,9 @@ export function Header() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-blue-500/20 rounded-md opacity-0 hover:opacity-100 transition-opacity duration-300" />
               {isMenuOpen ? (
-                <X className="h-4 w-4 relative z-10 transition-transform duration-300" />
+                <X className="h-5 w-5 relative z-10 transition-transform duration-300" />
               ) : (
-                <Menu className="h-4 w-4 relative z-10 transition-transform duration-300" />
+                <Menu className="h-5 w-5 relative z-10 transition-transform duration-300" />
               )}
             </Button>
           </div>
@@ -107,21 +105,20 @@ export function Header() {
         {/* Mobile Navigation */}
         <div className={cn(
           "md:hidden overflow-hidden transition-all duration-500 ease-out",
-          isMenuOpen ? "max-h-80 opacity-100 pb-4" : "max-h-0 opacity-0"
+          isMenuOpen ? "max-h-64 opacity-100" : "max-h-0 opacity-0"
         )}>
-          <nav className="mx-2 mt-2 border-t border-white/10 bg-background/30 backdrop-blur-md rounded-b-xl dark:border-white/10 dark:bg-black/30">
-            <div className="space-y-1 p-3">
+          <nav className="py-4 border-t border-white/10 bg-background/20 backdrop-blur-md rounded-b-xl mx-2 mb-2 dark:border-white/10 dark:bg-black/20">
+            <div className="space-y-2 px-4">
               {navItems.map((item, index) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={cn(
-                    "block px-3 py-2.5 text-sm font-medium text-muted-foreground transition-all duration-300",
+                    "block px-4 py-3 text-sm font-medium text-muted-foreground transition-all duration-300",
                     "hover:text-foreground hover:bg-white/10 rounded-lg hover:backdrop-blur-sm",
                     "dark:hover:bg-white/5 dark:hover:border-white/10",
-                    "hover:shadow-md hover:shadow-violet-500/10 hover:translate-x-1",
-                    "border-l-2 border-transparent hover:border-violet-500/50",
-                    "active:scale-95 active:bg-white/15 dark:active:bg-white/10"
+                    "hover:shadow-md hover:shadow-violet-500/10 hover:translate-x-2",
+                    "border-l-2 border-transparent hover:border-violet-500/50"
                   )}
                   style={{ 
                     animationDelay: `${index * 50}ms`,
@@ -146,20 +143,6 @@ export function Header() {
           to {
             opacity: 1;
             transform: translateY(0);
-          }
-        }
-        
-        /* Ensure theme toggle icons are properly sized on mobile */
-        @media (max-width: 768px) {
-          :global(.theme-toggle button) {
-            width: 32px !important;
-            height: 32px !important;
-            padding: 6px !important;
-          }
-          
-          :global(.theme-toggle svg) {
-            width: 16px !important;
-            height: 16px !important;
           }
         }
       `}</style>
