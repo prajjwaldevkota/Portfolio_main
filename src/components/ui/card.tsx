@@ -2,7 +2,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { motion } from "framer-motion"
+import { motion, HTMLMotionProps } from "framer-motion"
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -81,12 +81,12 @@ CardFooter.displayName = "CardFooter"
 // Glassmorphism + animated card
 const GlassCard = React.forwardRef<
   HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { animate?: boolean }
+  HTMLMotionProps<"div"> & { animate?: boolean }
 >(({ className, animate = true, ...props }, ref) => (
   <motion.div
     ref={ref}
-    initial={animate ? { opacity: 0, y: 40 } : false}
-    whileInView={animate ? { opacity: 1, y: 0 } : false}
+    initial={animate ? { opacity: 0, y: 40 } : undefined}
+    whileInView={animate ? { opacity: 1, y: 0 } : undefined}
     viewport={{ once: true, amount: 0.2 }}
     transition={{ duration: 0.6, ease: "easeOut" }}
     className={cn(
