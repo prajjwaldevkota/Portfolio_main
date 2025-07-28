@@ -23,8 +23,7 @@ export function Footer() {
 
           <div className="text-center space-y-2">
             <p className="text-muted-foreground flex items-center justify-center gap-1">
-              © 2024 Your Name. Made with <Heart className="h-4 w-4 text-red-500 fill-current" /> using Next.js
-            </p>
+              © 2025 Prajjwal Devkota.            </p>
             <p className="text-sm text-muted-foreground/60">Built with Next.js, Tailwind CSS, and shadcn/ui</p>
           </div>
         </div>

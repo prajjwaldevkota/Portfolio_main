@@ -15,7 +15,7 @@ function UnderConstruction() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
       <div className="text-center px-6 py-12">
         <div className="mb-8">
-          <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full flex items-center justify-center">
+          <div className="w-24 h-24 mx-auto mb-6 bg-gradient-to-r from-red-500 to-green-600 rounded-full flex items-center justify-center">
             <svg 
               className="w-12 h-12 text-white" 
               fill="none" 
