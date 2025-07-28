@@ -103,7 +103,7 @@ export function Hero() {
             <Button size="lg" className="rounded-full px-8">
               View My Work
             </Button>
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+            <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer">
               <Button
                 variant="outline"
                 size="lg"

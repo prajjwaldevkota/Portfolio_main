@@ -77,11 +77,20 @@ export function Projects() {
                   ))}
                 </div>
                 <div className="flex gap-3">
-                  <Button size="sm" className="flex-1 rounded-full">
+                  <Button 
+                    size="sm" 
+                    className="flex-1 rounded-full"
+                    onClick={() => window.open(project.liveUrl, '_blank')}
+                  >
                     <ExternalLink className="h-3 w-3 mr-2" />
                     Live Demo
                   </Button>
-                  <Button size="sm" variant="outline" className="flex-1 rounded-full bg-transparent">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    className="flex-1 rounded-full bg-transparent"
+                    onClick={() => window.open(project.githubUrl, '_blank')}
+                  >
                     <Github className="h-3 w-3 mr-2" />
                     Code
                   </Button>
