@@ -5,32 +5,24 @@ import { CalendarDays, MapPin } from "lucide-react"
 export function Experience() {
   const experiences = [
     {
-      title: "Senior Full Stack Developer",
-      company: "Tech Company Inc.",
-      location: "San Francisco, CA",
-      period: "2022 - Present",
+      title: "IT Support Analyst",
+      company: "EMCO",
+      location: "London, Ontario, Canada",
+      period: "2024 May - 2024 August",
       description:
-        "Led development of multiple web applications, mentored junior developers, and implemented best practices for code quality and performance.",
-      technologies: ["React", "Node.js", "AWS", "PostgreSQL"],
+        "I was responsible for providing technical support to the employees of EMCO. I was also responsible for the maintenance of the company's network and hardware.",
+      technologies: ["Windows", "Linux", "Network", "Hardware", "ITIL", "SCCM", "Active Directory", "Entra ID"],
     },
     {
-      title: "Frontend Developer",
-      company: "Digital Agency",
-      location: "New York, NY",
-      period: "2020 - 2022",
+      title: "IT Support Assistant",
+      company: "Ministry of Solicitor General",
+      location: "London, Ontario, Canada",
+      period: "2023 Jan - 2023 May",
       description:
-        "Developed responsive web applications for various clients, collaborated with design teams, and optimized applications for performance.",
-      technologies: ["Vue.js", "JavaScript", "SCSS", "Firebase"],
+        "I was responsible for providing technical support to the employees of the Ministry of Solicitor General. I was also responsible for the maintenance of the company's network and hardware.",
+      technologies: ["Windows", "AV", "Network", "Hardware", "SCCM", "Active Directory", "Entra ID", "Office 365"],
     },
-    {
-      title: "Junior Developer",
-      company: "Startup Co.",
-      location: "Austin, TX",
-      period: "2019 - 2020",
-      description:
-        "Built and maintained web applications, participated in code reviews, and contributed to the development of new features.",
-      technologies: ["HTML", "CSS", "JavaScript", "PHP"],
-    },
+    
   ]
 
   return (

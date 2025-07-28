@@ -7,28 +7,29 @@ export function Skills() {
     {
       title: "Frontend",
       icon: <Globe className="h-5 w-5" />,
-      skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Vue.js"],
+      skills: ["React", "TypeScript", "Tailwind CSS", "Vue.js"],
       gradient: "from-blue-500/10 to-cyan-500/10",
     },
     {
-      title: "Backend",
+      title: "Backend & Scripting",
       icon: <Code className="h-5 w-5" />,
-      skills: ["Node.js", "Python", "Express", "FastAPI", "REST APIs"],
+      skills: ["Node.js", "Python", "PowerShell", "REST APIs", "Fast API", "GraphQL"],
       gradient: "from-green-500/10 to-emerald-500/10",
     },
     {
-      title: "Database",
+      title: "Database & Cloud",
       icon: <Database className="h-5 w-5" />,
-      skills: ["PostgreSQL", "MongoDB", "Redis", "Supabase", "Prisma"],
+      skills: ["PostgreSQL", "MySQL", "Intune", "Azure Active Directory", "SCCM", "Microsoft 365"],
       gradient: "from-purple-500/10 to-violet-500/10",
     },
     {
-      title: "Mobile",
+      title: "Systems & Tools",
       icon: <Smartphone className="h-5 w-5" />,
-      skills: ["React Native", "Flutter", "iOS", "Android", "Expo"],
+      skills: ["Windows 10/11", "macOS", "Virtual Desktops", "ServiceNow", "Jira", "Zoom", "Autopilot", "Intune", "SCCM", "Microsoft 365"],
       gradient: "from-orange-500/10 to-red-500/10",
     },
   ]
+  
 
   return (
     <section id="skills" className="py-24 bg-muted/30">

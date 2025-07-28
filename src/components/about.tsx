@@ -9,7 +9,7 @@ export function About() {
           <p className="text-sm font-medium text-primary mb-2 tracking-wider uppercase">About</p>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">About Me</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
-            Learn more about my background, interests, and what drives me as a developer
+            Learn more about my background, interests, and what drives me as a passionate technologist and developer.
           </p>
         </div>
 
@@ -17,27 +17,30 @@ export function About() {
           <div className="space-y-8">
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-muted-foreground">
-                I&apos;m a passionate full-stack developer with over 3 years of experience building scalable web
-                applications. I specialize in React, Node.js, and modern web technologies, with a focus on creating
-                intuitive user experiences.
+                I&apos;m Prajjwal, a full-stack developer and IT systems analyst with a solid foundation in both backend infrastructure and frontend development. My experience spans across enterprise-level service desk support and hands-on web development projects.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                When I&apos;m not coding, you can find me exploring new technologies, contributing to open source projects,
-                or sharing knowledge with the developer community through writing and mentoring.
+                I’ve worked with teams at EMCO Corporation and the Ministry of the Solicitor General, where I provided end-to-end IT support, automated system tasks with PowerShell, and helped streamline device lifecycle management with tools like Intune, SCCM, and Autopilot.
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                On the dev side, I&apos;m always building. From React-based dashboards to automation scripts, my GitHub showcases a variety of personal and collaborative projects reflecting my growth and curiosity in full-stack development and cloud infrastructure.
+              </p>
+              <p className="text-lg leading-relaxed text-muted-foreground">
+                I&apos;m currently pursuing my advanced diploma in Computer Programming and Analysis and actively expanding my skillset through certifications in cybersecurity, networking, and cloud computing.
               </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
               <GlassCard>
                 <CardContent className="p-6 text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">50+</div>
-                  <div className="text-sm text-muted-foreground font-medium">Projects Completed</div>
+                  <div className="text-3xl font-bold text-primary mb-1">15+</div>
+                  <div className="text-sm text-muted-foreground font-medium">Projects on GitHub</div>
                 </CardContent>
               </GlassCard>
               <GlassCard>
                 <CardContent className="p-6 text-center">
-                  <div className="text-3xl font-bold text-secondary-foreground mb-1">3+</div>
-                  <div className="text-sm text-muted-foreground font-medium">Years Experience</div>
+                  <div className="text-3xl font-bold text-secondary-foreground mb-1">1.5+</div>
+                  <div className="text-sm text-muted-foreground font-medium">Years of Experience</div>
                 </CardContent>
               </GlassCard>
             </div>
@@ -47,8 +50,8 @@ export function About() {
             <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 p-1">
               <div className="w-full h-full rounded-2xl overflow-hidden">
                 <Image
-                  src="/placeholder.svg?height=500&width=500"
-                  alt="About me"
+                  src="/prajjwal.jpg" // <-- Replace with your actual image path
+                  alt="Prajjwal Devkota"
                   width={500}
                   height={500}
                   className="object-cover w-full h-full"
