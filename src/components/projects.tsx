@@ -7,30 +7,30 @@ import Image from "next/image"
 export function Projects() {
   const projects = [
     {
-      title: "E-Commerce Platform",
+      title: "Flight Price Tracker",
       description:
-        "A full-stack e-commerce solution with payment integration, inventory management, and admin dashboard.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-      liveUrl: "#",
-      githubUrl: "#",
+        "A full-stack web application that aggregates and compares flight prices from multiple providers in real-time. Built with React 19, FastAPI, and integrated with Amadeus and Kiwi APIs, the app features intelligent airport autocomplete, multi-passenger support, and responsive design with dark/light mode. The backend implements async processing, intelligent caching, and rate limiting for optimal performance.",
+      image: "/flighttracker.svg",
+      technologies: ["React", "Tailwind", "FastAPI", "Python", "Amadeus API", "RapidAPI", "Google Cloud Platform", "Vercel"],
+      liveUrl: "https://flight-pricetracker.vercel.app/",
+      githubUrl: "https://github.com/prajjwaldevkota/FlightTracker",
     },
     {
-      title: "Task Management App",
+      title: "Express Entry Tracker",
       description:
-        "A collaborative task management application with real-time updates and team collaboration features.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["React", "Node.js", "Socket.io", "MongoDB"],
-      liveUrl: "#",
-      githubUrl: "#",
+        "Express Entry Tracker is a modern, responsive web application that displays historical data for Canada’s Express Entry draws. This frontend project uses an external API to provide the latest Express Entry draw information, a complete draw history with filtering and sorting options, and trend visualizations and has localization for English and French.",
+      image: "/expressentry.png",
+      technologies: ["React", "Node.js", "Rest API", "Tailwind", "i18n" ,"Netlify"],
+      liveUrl: "https://expressentrytracker.netlify.app",
+      githubUrl: "https://github.com/prajjwaldevkota/ExpressEntryTracker",
     },
     {
-      title: "Weather Dashboard",
-      description: "A responsive weather dashboard with location-based forecasts and interactive charts.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["Vue.js", "Chart.js", "Weather API", "Tailwind"],
-      liveUrl: "#",
-      githubUrl: "#",
+      title: "Youtube Video to Audio Converter",
+      description: "A dockerized web application that allows users to convert Youtube videos to audio using the YT-DLP along with FFMPEG for audio processing and conversion to higher format.",
+      image: "/youtube.svg",
+      technologies: ["Vite", "JavaScript", "Tailwind", "FFmepg", "YT-DLP", "Docker", "Flask"],
+      liveUrl: "https://github.com/prajjwaldevkota/Video2AudioConverter",
+      githubUrl: "https://github.com/prajjwaldevkota/Video2AudioConverter",
     },
   ]
 
@@ -56,7 +56,9 @@ export function Projects() {
                   src={project.image || "/placeholder.svg"}
                   alt={project.title}
                   fill
-                  className="object-cover transition-transform duration-300 group-hover:scale-105"
+                  className={`transition-transform duration-300 group-hover:scale-105 ${
+                    project.image?.endsWith('.svg') ? 'object-contain' : 'object-cover'
+                  }`}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>

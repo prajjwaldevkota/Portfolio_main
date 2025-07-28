@@ -1,0 +1,92 @@
+<svg viewBox="0 0 400 225" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Rectangle -->
+  <rect x="5" y="5" width="390" height="215" rx="15" ry="15" fill="url(#bgGradient)" stroke="url(#borderGradient)" stroke-width="2"/>
+  
+  <!-- Main Airplane -->
+  <g transform="translate(200, 112) scale(1.8)">
+    <!-- Airplane body -->
+    <path d="M-25 0 L25 0 L30 -3 L30 3 L25 0 Z" fill="url(#planeGradient)" stroke="#1e40af" stroke-width="1"/>
+    
+    <!-- Wings -->
+    <path d="M-10 0 L-25 -15 L-20 -18 L-5 -3 Z" fill="url(#wingGradient)" stroke="#1e40af" stroke-width="1"/>
+    <path d="M-10 0 L-25 15 L-20 18 L-5 3 Z" fill="url(#wingGradient)" stroke="#1e40af" stroke-width="1"/>
+    
+    <!-- Tail -->
+    <path d="M25 0 L35 -8 L38 -5 L28 2 Z" fill="url(#tailGradient)" stroke="#1e40af" stroke-width="1"/>
+    <path d="M25 0 L35 8 L38 5 L28 -2 Z" fill="url(#tailGradient)" stroke="#1e40af" stroke-width="1"/>
+    
+    <!-- Cockpit window -->
+    <circle cx="-15" cy="0" r="3" fill="#60a5fa" opacity="0.8"/>
+  </g>
+  
+  <!-- Flight Path Trails -->
+  <g opacity="0.6">
+    <!-- Dotted trail behind plane -->
+    <circle cx="80" cy="112" r="4" fill="#3b82f6"/>
+    <circle cx="60" cy="116" r="3" fill="#60a5fa"/>
+    <circle cx="40" cy="108" r="2.5" fill="#93c5fd"/>
+    <circle cx="20" cy="112" r="2" fill="#dbeafe"/>
+    
+    <!-- Search magnifying glass -->
+    <g transform="translate(320, 70) scale(1.5)">
+      <circle cx="0" cy="0" r="12" fill="none" stroke="url(#searchGradient)" stroke-width="3"/>
+      <line x1="8.5" y1="8.5" x2="18" y2="18" stroke="url(#searchGradient)" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="0" cy="0" r="8" fill="rgba(59, 130, 246, 0.1)"/>
+    </g>
+  </g>
+  
+  <!-- Location pins -->
+  <g transform="translate(100, 160) scale(1.6)">
+    <path d="M0 0 C-4 -8 4 -8 0 0 Z" fill="#ef4444"/>
+    <circle cx="0" cy="-4" r="2" fill="#ffffff"/>
+  </g>
+  
+  <g transform="translate(300, 160) scale(1.6)">
+    <path d="M0 0 C-4 -8 4 -8 0 0 Z" fill="#10b981"/>
+    <circle cx="0" cy="-4" r="2" fill="#ffffff"/>
+  </g>
+  
+  <!-- Connecting dotted line between pins -->
+  <line x1="100" y1="155" x2="300" y2="155" stroke="#6b7280" stroke-width="3" stroke-dasharray="6,6" opacity="0.5"/>
+  
+  <!-- App Name -->
+  <text x="200" y="200" text-anchor="middle" fill="url(#textGradient)" font-family="system-ui, -apple-system, sans-serif" font-size="24" font-weight="700">FlightFinder</text>
+  
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f0f9ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0f2fe;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="borderGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:0.5" />
+    </linearGradient>
+    
+    <linearGradient id="planeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="wingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="tailGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="searchGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8b5cf6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

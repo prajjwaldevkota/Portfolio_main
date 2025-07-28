@@ -9,6 +9,7 @@ const TYPING_SPEED = 80; // ms per character
 
 export function Hero() {
   const [displayed, setDisplayed] = useState("");
+  
 
   useEffect(() => {
     let i = 0;
@@ -30,7 +31,7 @@ export function Hero() {
         <div className="text-center space-y-8 max-w-4xl mx-auto">
           <div className="relative w-28 h-28 mx-auto rounded-full overflow-hidden ring-4 ring-primary/20 ring-offset-4 ring-offset-background">
             <Image
-              src="/placeholder.svg?height=112&width=112"
+              src="/memoji.png"
               alt="Profile"
               fill
               className="object-cover"

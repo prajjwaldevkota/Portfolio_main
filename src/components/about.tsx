@@ -1,5 +1,4 @@
 import { GlassCard, CardContent } from "@/components/ui/card"
-import Image from "next/image"
 
 export function About() {
   return (
@@ -13,14 +12,14 @@ export function About() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <div className="space-y-8">
             <div className="space-y-6">
               <p className="text-lg leading-relaxed text-muted-foreground">
                 I&apos;m Prajjwal, a full-stack developer and IT systems analyst with a solid foundation in both backend infrastructure and frontend development. My experience spans across enterprise-level service desk support and hands-on web development projects.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                I’ve worked with teams at EMCO Corporation and the Ministry of the Solicitor General, where I provided end-to-end IT support, automated system tasks with PowerShell, and helped streamline device lifecycle management with tools like Intune, SCCM, and Autopilot.
+                I&apos;ve worked with teams at EMCO Corporation and the Ministry of the Solicitor General, where I provided end-to-end IT support, automated system tasks with PowerShell, and helped streamline device lifecycle management with tools like Intune, SCCM, and Autopilot.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground">
                 On the dev side, I&apos;m always building. From React-based dashboards to automation scripts, my GitHub showcases a variety of personal and collaborative projects reflecting my growth and curiosity in full-stack development and cloud infrastructure.
@@ -30,33 +29,19 @@ export function About() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
               <GlassCard>
-                <CardContent className="p-6 text-center">
-                  <div className="text-3xl font-bold text-primary mb-1">15+</div>
+                <CardContent className="p-8 text-center">
+                  <div className="text-4xl font-bold text-primary mb-2">15+</div>
                   <div className="text-sm text-muted-foreground font-medium">Projects on GitHub</div>
                 </CardContent>
               </GlassCard>
               <GlassCard>
-                <CardContent className="p-6 text-center">
-                  <div className="text-3xl font-bold text-secondary-foreground mb-1">1.5+</div>
-                  <div className="text-sm text-muted-foreground font-medium">Years of Experience</div>
+                <CardContent className="p-8 text-center">
+                  <div className="text-4xl font-bold text-secondary-foreground mb-2">1</div>
+                  <div className="text-sm text-muted-foreground font-medium">Year of Experience</div>
                 </CardContent>
               </GlassCard>
-            </div>
-          </div>
-
-          <div className="relative">
-            <div className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 p-1">
-              <div className="w-full h-full rounded-2xl overflow-hidden">
-                <Image
-                  src="/prajjwal.jpg" // <-- Replace with your actual image path
-                  alt="Prajjwal Devkota"
-                  width={500}
-                  height={500}
-                  className="object-cover w-full h-full"
-                />
-              </div>
             </div>
           </div>
         </div>

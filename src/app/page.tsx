@@ -8,7 +8,7 @@ import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
 
 // Set this to false to show the actual portfolio, true for under construction
-const SHOW_UNDER_CONSTRUCTION = true
+const SHOW_UNDER_CONSTRUCTION = false
 
 function UnderConstruction() {
   return (
