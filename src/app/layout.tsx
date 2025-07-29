@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Prajjwal Devkota - Full Stack Developer Portfolio",
+  title: "Prajjwal Devkota - Portfolio",
   description: "Full Stack Developer crafting exceptional digital experiences with modern technologies. Specializing in React, TypeScript, Node.js, and Python.",
   keywords: [
     "Full Stack Developer",
