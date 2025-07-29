@@ -2,24 +2,50 @@
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Github, Linkedin, Mail, Download } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 
 const NAME = "Prajjwal Devkota";
 const TYPING_SPEED = 80; // ms per character
 
 export function Hero() {
   const [displayed, setDisplayed] = useState("");
-  
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
 
-  useEffect(() => {
+  const startTyping = useCallback(() => {
     let i = 0;
     const interval = setInterval(() => {
       setDisplayed(NAME.slice(0, i + 1));
       i++;
-      if (i === NAME.length) clearInterval(interval);
+      if (i === NAME.length) {
+        clearInterval(interval);
+        setIsTypingComplete(true);
+      }
     }, TYPING_SPEED);
     return () => clearInterval(interval);
   }, []);
+
+  useEffect(() => {
+    const cleanup = startTyping();
+    return cleanup;
+  }, [startTyping]);
+
+  const socialLinks = useMemo(() => [
+    {
+      href: "https://github.com/prajjwaldevkota",
+      icon: <Github className="h-4 w-4" />,
+      label: "GitHub"
+    },
+    {
+      href: "https://linkedin.com/in/prajjwaldevkota",
+      icon: <Linkedin className="h-4 w-4" />,
+      label: "LinkedIn"
+    },
+    {
+      href: "mailto:devkota.prj@gmail.com",
+      icon: <Mail className="h-4 w-4" />,
+      label: "Email"
+    }
+  ], []);
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -35,6 +61,8 @@ export function Hero() {
               alt="Profile"
               fill
               className="object-cover"
+              priority
+              sizes="112px"
             />
           </div>
 
@@ -47,7 +75,7 @@ export function Hero() {
                 Hi, I&apos;m{" "}
                 <span className="inline-block bg-gradient-to-r from-blue-400 via-purple-900 to-pink-900 bg-clip-text text-transparent">
                   {displayed}
-                  <span className="animate-blink">|</span>
+                  <span className={`animate-blink ${isTypingComplete ? 'opacity-0' : 'opacity-100'}`}>|</span>
                 </span>
               </h1>
               <p className="text-xl sm:text-2xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -58,56 +86,34 @@ export function Hero() {
           </div>
 
           <div className="flex justify-center space-x-2">
-            <a
-              href="https://github.com/prajjwaldevkota"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full bg-transparent"
+            {socialLinks.map((link, index) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={link.label}
               >
-                <Github className="h-4 w-4" />
-              </Button>
-            </a>
-            <a
-              href="https://linkedin.com/in/prajjwaldevkota"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full bg-transparent"
-              >
-                <Linkedin className="h-4 w-4" />
-              </Button>
-            </a>
-            <a
-              href="mailto:devkota.prj@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full bg-transparent"
-              >
-                <Mail className="h-4 w-4" />
-              </Button>
-            </a>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="rounded-full bg-transparent hover:scale-110 transition-transform duration-200"
+                >
+                  {link.icon}
+                </Button>
+              </a>
+            ))}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="rounded-full px-8">
+            <Button size="lg" className="rounded-full px-8 hover:scale-105 transition-transform duration-200">
               View My Work
             </Button>
             <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer">
               <Button
                 variant="outline"
                 size="lg"
-                className="rounded-full px-8 bg-transparent"
+                className="rounded-full px-8 bg-transparent hover:scale-105 transition-transform duration-200"
               >
                 <Download className="h-4 w-4 mr-2" />
                 Resume

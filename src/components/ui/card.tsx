@@ -1,8 +1,8 @@
-"use client"
-import * as React from "react"
+"use client";
+import * as React from "react";
 
-import { cn } from "@/lib/utils"
-import { motion, HTMLMotionProps } from "framer-motion"
+import { cn } from "@/lib/utils";
+import { motion, HTMLMotionProps } from "framer-motion";
 
 const Card = React.forwardRef<
   HTMLDivElement,
@@ -16,8 +16,8 @@ const Card = React.forwardRef<
     )}
     {...props}
   />
-))
-Card.displayName = "Card"
+));
+Card.displayName = "Card";
 
 const CardHeader = React.forwardRef<
   HTMLDivElement,
@@ -28,8 +28,8 @@ const CardHeader = React.forwardRef<
     className={cn("flex flex-col space-y-1.5 p-6", className)}
     {...props}
   />
-))
-CardHeader.displayName = "CardHeader"
+));
+CardHeader.displayName = "CardHeader";
 
 const CardTitle = React.forwardRef<
   HTMLDivElement,
@@ -43,8 +43,8 @@ const CardTitle = React.forwardRef<
     )}
     {...props}
   />
-))
-CardTitle.displayName = "CardTitle"
+));
+CardTitle.displayName = "CardTitle";
 
 const CardDescription = React.forwardRef<
   HTMLDivElement,
@@ -55,16 +55,16 @@ const CardDescription = React.forwardRef<
     className={cn("text-sm text-muted-foreground", className)}
     {...props}
   />
-))
-CardDescription.displayName = "CardDescription"
+));
+CardDescription.displayName = "CardDescription";
 
 const CardContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => (
   <div ref={ref} className={cn("p-6 pt-0", className)} {...props} />
-))
-CardContent.displayName = "CardContent"
+));
+CardContent.displayName = "CardContent";
 
 const CardFooter = React.forwardRef<
   HTMLDivElement,
@@ -75,8 +75,8 @@ const CardFooter = React.forwardRef<
     className={cn("flex items-center p-6 pt-0", className)}
     {...props}
   />
-))
-CardFooter.displayName = "CardFooter"
+));
+CardFooter.displayName = "CardFooter";
 
 // Glassmorphism + animated card
 const GlassCard = React.forwardRef<
@@ -90,16 +90,23 @@ const GlassCard = React.forwardRef<
     viewport={{ once: true, amount: 0.2 }}
     transition={{ duration: 0.6, ease: "easeOut" }}
     className={cn(
-      // Enhanced glassmorphism styles with proper light/dark mode
-      "rounded-2xl border border-white/20 bg-white/90 backdrop-blur-xl shadow-2xl overflow-hidden",
-      "dark:border-white/10 dark:bg-black/40 dark:shadow-black/20",
-      "hover:border-white/30 hover:bg-white/95 dark:hover:border-white/20 dark:hover:bg-black/50",
+      "rounded-2xl border border-black/10 bg-white/70 backdrop-blur-xl shadow-2xl overflow-hidden",
+      "dark:border-white/20 dark:bg-white/10 dark:shadow-black/20",
+      "hover:border-black/20 hover:bg-white/80 dark:hover:border-white/30 dark:hover:bg-white/15",
       "transition-all duration-300",
       className
     )}
     {...props}
   />
-))
-GlassCard.displayName = "GlassCard"
+));
+GlassCard.displayName = "GlassCard";
 
-export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, GlassCard }
+export {
+  Card,
+  CardHeader,
+  CardFooter,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  GlassCard,
+};

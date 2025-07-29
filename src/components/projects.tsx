@@ -4,8 +4,12 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { ExternalLink, Github } from "lucide-react"
 import Image from "next/image"
+import { useState, useEffect, useRef } from "react"
 
 export function Projects() {
+  const [visibleProjects, setVisibleProjects] = useState<number[]>([])
+  const projectRefs = useRef<(HTMLDivElement | null)[]>([])
+
   const projects = [
     {
       title: "Flight Price Tracker",
@@ -19,7 +23,7 @@ export function Projects() {
     {
       title: "Express Entry Tracker",
       description:
-        "Express Entry Tracker is a modern, responsive web application that displays historical data for Canada’s Express Entry draws. This frontend project uses an external API to provide the latest Express Entry draw information, a complete draw history with filtering and sorting options, and trend visualizations and has localization for English and French.",
+        "Express Entry Tracker is a modern, responsive web application that displays historical data for Canada's Express Entry draws. This frontend project uses an external API to provide the latest Express Entry draw information, a complete draw history with filtering and sorting options, and trend visualizations and has localization for English and French.",
       image: "/expressentry.png",
       technologies: ["React", "Node.js", "Rest API", "Tailwind", "i18n" ,"Netlify"],
       liveUrl: "https://expressentrytracker.netlify.app",
@@ -35,6 +39,26 @@ export function Projects() {
     },
   ]
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const index = projectRefs.current.findIndex(ref => ref === entry.target)
+          if (entry.isIntersecting && index !== -1) {
+            setVisibleProjects(prev => [...new Set([...prev, index])])
+          }
+        })
+      },
+      { threshold: 0.1, rootMargin: '50px' }
+    )
+
+    projectRefs.current.forEach(ref => {
+      if (ref) observer.observe(ref)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
   return (
     <section id="projects" className="py-24 bg-white dark:bg-transparent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -48,47 +72,61 @@ export function Projects() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {projects.map((project, index) => (
-            <GlassCard
+            <div
               key={index}
-              className="group overflow-hidden"
+              ref={(el) => {
+                projectRefs.current[index] = el;
+              }}
+              className={`transition-all duration-700 ease-out ${
+                visibleProjects.includes(index) 
+                  ? 'opacity-100 translate-y-0' 
+                  : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${index * 200}ms` }}
             >
-              <div className="aspect-video relative overflow-hidden">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  className={`transition-transform duration-300 group-hover:scale-105 ${
-                    project.image?.endsWith('.svg') ? 'object-contain' : 'object-cover'
-                  }`}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-              <CardHeader className="pb-4">
-                <CardTitle className="text-xl font-semibold">{project.title}</CardTitle>
-                <CardDescription className="text-muted-foreground leading-relaxed">
-                  {project.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4 pt-0">
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, techIndex) => (
-                    <Badge key={techIndex} variant="outline" className="text-xs">
-                      {tech}
-                    </Badge>
-                  ))}
+              <GlassCard
+                className="group overflow-hidden h-full"
+              >
+                <div className="aspect-video relative overflow-hidden">
+                  <Image
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className={`transition-transform duration-300 group-hover:scale-105 ${
+                      project.image?.endsWith('.svg') ? 'object-contain' : 'object-cover'
+                    }`}
+                    loading={visibleProjects.includes(index) ? "eager" : "lazy"}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <div className="flex gap-3">
-                  <Button size="sm" className="flex-1 rounded-full" onClick={() => window.open(project.liveUrl, '_blank')}>
-                    <ExternalLink className="h-3 w-3 mr-2" />
-                    Live Demo
-                  </Button>
-                  <Button size="sm" variant="outline" className="flex-1 rounded-full bg-transparent" onClick={() => window.open(project.githubUrl, '_blank')}>
-                    <Github className="h-3 w-3 mr-2" />
-                    Code
-                  </Button>
-                </div>
-              </CardContent>
-            </GlassCard>
+                <CardHeader className="pb-4">
+                  <CardTitle className="text-xl font-semibold">{project.title}</CardTitle>
+                  <CardDescription className="text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4 pt-0">
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.map((tech, techIndex) => (
+                      <Badge key={techIndex} variant="outline" className="text-xs">
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
+                  <div className="flex gap-3">
+                    <Button size="sm" className="flex-1 rounded-full" onClick={() => window.open(project.liveUrl, '_blank')}>
+                      <ExternalLink className="h-3 w-3 mr-2" />
+                      Live Demo
+                    </Button>
+                    <Button size="sm" variant="outline" className="flex-1 rounded-full bg-transparent" onClick={() => window.open(project.githubUrl, '_blank')}>
+                      <Github className="h-3 w-3 mr-2" />
+                      Code
+                    </Button>
+                  </div>
+                </CardContent>
+              </GlassCard>
+            </div>
           ))}
         </div>
       </div>

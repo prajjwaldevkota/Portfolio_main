@@ -76,8 +76,9 @@ export function Header() {
           </nav>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-3">
-            <div className="p-1 rounded-lg bg-white/5 backdrop-blur-sm border border-white/10 dark:bg-white/5 dark:border-white/10">
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Mobile Theme Toggle - Smaller and cleaner */}
+            <div className="rounded-md bg-white/10 backdrop-blur-sm border border-white/20 dark:bg-white/5 dark:border-white/10 hover:bg-white/20 dark:hover:bg-white/10 transition-all duration-300">
               <ThemeToggle />
             </div>
             <Button 
@@ -85,7 +86,7 @@ export function Header() {
               size="icon" 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={cn(
-                "relative bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20",
+                "relative h-9 w-9 bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20",
                 "dark:bg-white/5 dark:border-white/10 dark:hover:bg-white/10",
                 "transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-violet-500/20",
                 "dark:hover:shadow-violet-500/10",
@@ -94,9 +95,9 @@ export function Header() {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 to-blue-500/20 rounded-md opacity-0 hover:opacity-100 transition-opacity duration-300" />
               {isMenuOpen ? (
-                <X className="h-5 w-5 relative z-10 transition-transform duration-300" />
+                <X className="h-4 w-4 relative z-10 transition-transform duration-300" />
               ) : (
-                <Menu className="h-5 w-5 relative z-10 transition-transform duration-300" />
+                <Menu className="h-4 w-4 relative z-10 transition-transform duration-300" />
               )}
             </Button>
           </div>

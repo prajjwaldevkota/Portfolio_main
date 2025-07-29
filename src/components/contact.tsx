@@ -9,8 +9,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send, Loader2 } from "lucide-react";
-import { useState } from "react";
+import { Mail, MapPin, Phone, Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
+import { useState, useCallback } from "react";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -31,13 +31,13 @@ export function Contact() {
   }>({});
 
   // Email validation function
-  const validateEmail = (email: string): boolean => {
+  const validateEmail = useCallback((email: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
-  };
+  }, []);
 
   // Form validation function
-  const validateForm = (): boolean => {
+  const validateForm = useCallback((): boolean => {
     const newErrors: typeof errors = {};
 
     // First name validation
@@ -70,10 +70,10 @@ export function Contact() {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+  }, [formData, validateEmail]);
 
   // Real-time email validation
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const email = e.target.value;
     setFormData({ ...formData, email });
     
@@ -81,7 +81,7 @@ export function Contact() {
     if (email && errors.email && validateEmail(email)) {
       setErrors({ ...errors, email: undefined });
     }
-  };
+  }, [formData, errors, validateEmail]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -132,6 +132,27 @@ export function Contact() {
     }
   };
 
+  const contactInfo = [
+    {
+      icon: <Mail className="h-5 w-5 text-primary" />,
+      label: "Email",
+      value: "devkota.prj@gmail.com",
+      href: "mailto:devkota.prj@gmail.com"
+    },
+    {
+      icon: <Phone className="h-5 w-5 text-primary" />,
+      label: "Phone",
+      value: "+1 (555) 123-4567",
+      href: "tel:+15551234567"
+    },
+    {
+      icon: <MapPin className="h-5 w-5 text-primary" />,
+      label: "Location",
+      value: "London, ON",
+      href: "#"
+    }
+  ];
+
   return (
     <section id="contact" className="py-24 bg-white dark:bg-transparent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -162,37 +183,25 @@ export function Contact() {
             </div>
 
             <div className="space-y-6">
-              <div className="flex items-center space-x-4 p-4 rounded-xl bg-background/50">
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  <Mail className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <p className="font-medium">Email</p>
-                  <p className="text-muted-foreground">devkota.prj@gmail.com</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4 p-4 rounded-xl bg-background/50">
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  <Phone className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <p className="font-medium">Phone</p>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                </div>
-              </div>
-              <div className="flex items-center space-x-4 p-4 rounded-xl bg-background/50">
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  <MapPin className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <p className="font-medium">Location</p>
-                  <p className="text-muted-foreground">London, ON</p>
-                </div>
-              </div>
+              {contactInfo.map((info, index) => (
+                <a
+                  key={info.label}
+                  href={info.href}
+                  className="flex items-center space-x-4 p-4 rounded-xl bg-background/50 hover:bg-background/70 transition-all duration-300 hover:scale-105 group"
+                >
+                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors duration-300">
+                    {info.icon}
+                  </div>
+                  <div>
+                    <p className="font-medium">{info.label}</p>
+                    <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{info.value}</p>
+                  </div>
+                </a>
+              ))}
             </div>
           </div>
 
-          <GlassCard>
+          <GlassCard className="border-0 shadow-xl">
             <CardHeader>
               <CardTitle className="text-xl font-semibold">
                 Send me a message
@@ -208,9 +217,7 @@ export function Contact() {
                 <div className="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <svg className="h-5 w-5 text-green-400 dark:text-green-300" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
+                      <CheckCircle className="h-5 w-5 text-green-400 dark:text-green-300" />
                     </div>
                     <div className="ml-3">
                       <p className="text-sm font-medium">Message sent successfully!</p>
@@ -224,9 +231,7 @@ export function Contact() {
                 <div className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <svg className="h-5 w-5 text-red-400 dark:text-red-300" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
-                      </svg>
+                      <AlertCircle className="h-5 w-5 text-red-400 dark:text-red-300" />
                     </div>
                     <div className="ml-3">
                       <p className="text-sm font-medium">Failed to send message</p>
@@ -241,7 +246,11 @@ export function Contact() {
                   <div>
                     <Input
                       placeholder="First Name"
-                      className={`rounded-xl ${errors.firstName ? 'border-red-500 focus:border-red-500' : ''}`}
+                      className={`rounded-xl transition-all duration-200 ${
+                        errors.firstName 
+                          ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' 
+                          : 'focus:border-primary focus:ring-primary/20'
+                      }`}
                       value={formData.firstName}
                       onChange={(e) =>
                         setFormData({ ...formData, firstName: e.target.value })
@@ -254,15 +263,23 @@ export function Contact() {
                           setErrors({ ...errors, firstName: undefined });
                         }
                       }}
+                      aria-describedby={errors.firstName ? "firstName-error" : undefined}
                     />
                     {errors.firstName && (
-                      <p className="text-red-500 text-xs mt-1">{errors.firstName}</p>
+                      <p id="firstName-error" className="text-red-500 text-xs mt-1 flex items-center">
+                        <AlertCircle className="h-3 w-3 mr-1" />
+                        {errors.firstName}
+                      </p>
                     )}
                   </div>
                   <div>
                     <Input
                       placeholder="Last Name"
-                      className={`rounded-xl ${errors.lastName ? 'border-red-500 focus:border-red-500' : ''}`}
+                      className={`rounded-xl transition-all duration-200 ${
+                        errors.lastName 
+                          ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' 
+                          : 'focus:border-primary focus:ring-primary/20'
+                      }`}
                       value={formData.lastName}
                       onChange={(e) =>
                         setFormData({ ...formData, lastName: e.target.value })
@@ -275,9 +292,13 @@ export function Contact() {
                           setErrors({ ...errors, lastName: undefined });
                         }
                       }}
+                      aria-describedby={errors.lastName ? "lastName-error" : undefined}
                     />
                     {errors.lastName && (
-                      <p className="text-red-500 text-xs mt-1">{errors.lastName}</p>
+                      <p id="lastName-error" className="text-red-500 text-xs mt-1 flex items-center">
+                        <AlertCircle className="h-3 w-3 mr-1" />
+                        {errors.lastName}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -285,7 +306,11 @@ export function Contact() {
                   <Input
                     type="email"
                     placeholder="Email Address"
-                    className={`rounded-xl ${errors.email ? 'border-red-500 focus:border-red-500' : ''}`}
+                    className={`rounded-xl transition-all duration-200 ${
+                      errors.email 
+                        ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' 
+                        : 'focus:border-primary focus:ring-primary/20'
+                    }`}
                     value={formData.email}
                     onChange={handleEmailChange}
                     disabled={isSubmitting}
@@ -296,21 +321,29 @@ export function Contact() {
                         setErrors({ ...errors, email: undefined });
                       }
                     }}
+                    aria-describedby={errors.email ? "email-error" : undefined}
                   />
                   {errors.email && (
-                    <p className="text-red-500 text-xs mt-1">{errors.email}</p>
+                    <p id="email-error" className="text-red-500 text-xs mt-1 flex items-center">
+                      <AlertCircle className="h-3 w-3 mr-1" />
+                      {errors.email}
+                    </p>
                   )}
                 </div>
                 <Input
                   placeholder="Subject"
-                  className="rounded-xl"
+                  className="rounded-xl focus:border-primary focus:ring-primary/20 transition-all duration-200"
                   disabled={isSubmitting}
                 />
                 <div>
                   <Textarea
                     placeholder="Your Message"
                     rows={5}
-                    className={`rounded-xl resize-none ${errors.message ? 'border-red-500 focus:border-red-500' : ''}`}
+                    className={`rounded-xl resize-none transition-all duration-200 ${
+                      errors.message 
+                        ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' 
+                        : 'focus:border-primary focus:ring-primary/20'
+                    }`}
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
@@ -323,14 +356,18 @@ export function Contact() {
                         setErrors({ ...errors, message: undefined });
                       }
                     }}
+                    aria-describedby={errors.message ? "message-error" : undefined}
                   />
                   {errors.message && (
-                    <p className="text-red-500 text-xs mt-1">{errors.message}</p>
+                    <p id="message-error" className="text-red-500 text-xs mt-1 flex items-center">
+                      <AlertCircle className="h-3 w-3 mr-1" />
+                      {errors.message}
+                    </p>
                   )}
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full rounded-xl" 
+                  className="w-full rounded-xl hover:scale-105 transition-transform duration-200" 
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
