@@ -74,8 +74,8 @@ export function Experience() {
 
         <div className="max-w-4xl mx-auto space-y-6">
           {experiences.map((experience, index) => (
-            <GlassCard key={index}>
-              <CardHeader>
+            <GlassCard key={index} className="relative overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+              <CardHeader className="relative z-10">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                   <div>
                     <CardTitle className="text-xl">
@@ -97,7 +97,7 @@ export function Experience() {
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 relative z-10">
                 <p className="text-muted-foreground">
                   {experience.description}
                 </p>

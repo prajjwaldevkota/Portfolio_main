@@ -30,14 +30,14 @@ export function About() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-12">
-              <GlassCard>
-                <CardContent className="p-8 text-center">
+              <GlassCard className="relative overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="p-8 text-center relative z-10">
                   <div className="text-4xl font-bold text-primary mb-2">15+</div>
                   <div className="text-sm text-muted-foreground font-medium">Projects on GitHub</div>
                 </CardContent>
               </GlassCard>
-              <GlassCard>
-                <CardContent className="p-8 text-center">
+              <GlassCard className="relative overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+                <CardContent className="p-8 text-center relative z-10">
                   <div className="text-4xl font-bold text-secondary-foreground mb-2">1</div>
                   <div className="text-sm text-muted-foreground font-medium">Year of Experience</div>
                 </CardContent>

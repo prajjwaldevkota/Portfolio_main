@@ -9,14 +9,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send, Loader2, CheckCircle, AlertCircle } from "lucide-react";
-import { useState, useCallback } from "react";
+import { Mail, MapPin, Phone, Send, Loader2, CheckCircle, AlertCircle, Sparkles } from "lucide-react";
+import { useState, useCallback, useEffect } from "react";
 
 export function Contact() {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    subject: "",
     message: "",
     access_key: "03dec271-8971-4ef7-a7b0-e90b5afd4d95",
   });
@@ -27,8 +28,43 @@ export function Contact() {
     firstName?: string;
     lastName?: string;
     email?: string;
+    subject?: string;
     message?: string;
   }>({});
+  const [isTyping, setIsTyping] = useState(false);
+  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
+
+  // Auto-save form data to localStorage
+  useEffect(() => {
+    const savedData = localStorage.getItem('contactFormData');
+    if (savedData) {
+      try {
+        const parsed = JSON.parse(savedData);
+        setFormData(prev => ({ ...prev, ...parsed }));
+      } catch (error) {
+        console.error('Error parsing saved form data:', error);
+      }
+    }
+  }, []);
+
+  // Save form data as user types
+  useEffect(() => {
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    const timeout = setTimeout(() => {
+      localStorage.setItem('contactFormData', JSON.stringify(formData));
+      setIsTyping(false);
+    }, 1000);
+
+    setTypingTimeout(timeout);
+    setIsTyping(true);
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+    };
+  }, [formData]);
 
   // Email validation function
   const validateEmail = useCallback((email: string): boolean => {
@@ -61,6 +97,13 @@ export function Contact() {
       newErrors.email = "Please enter a valid email address";
     }
 
+    // Subject validation
+    if (!formData.subject.trim()) {
+      newErrors.subject = "Subject is required";
+    } else if (formData.subject.trim().length < 5) {
+      newErrors.subject = "Subject must be at least 5 characters";
+    }
+
     // Message validation
     if (!formData.message.trim()) {
       newErrors.message = "Message is required";
@@ -72,16 +115,19 @@ export function Contact() {
     return Object.keys(newErrors).length === 0;
   }, [formData, validateEmail]);
 
-  // Real-time email validation
-  const handleEmailChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const email = e.target.value;
-    setFormData({ ...formData, email });
+  // Real-time validation
+  const handleFieldChange = useCallback((field: keyof typeof formData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
     
-    // Clear email error if user is typing and email becomes valid
-    if (email && errors.email && validateEmail(email)) {
-      setErrors({ ...errors, email: undefined });
+    // Clear error if field becomes valid
+    if (errors[field as keyof typeof errors] && value.trim()) {
+      if (field === 'email' && validateEmail(value)) {
+        setErrors(prev => ({ ...prev, [field]: undefined }));
+      } else if (field !== 'email' && value.trim().length >= (field === 'subject' ? 5 : 2)) {
+        setErrors(prev => ({ ...prev, [field]: undefined }));
+      }
     }
-  }, [formData, errors, validateEmail]);
+  }, [errors, validateEmail]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -107,14 +153,17 @@ export function Contact() {
       if (result.success) {
         setIsSubmitted(true);
         setSubmitStatus("success");
+        // Clear form and localStorage
         setFormData({
           firstName: "",
           lastName: "",
           email: "",
+          subject: "",
           message: "",
           access_key: "03dec271-8971-4ef7-a7b0-e90b5afd4d95",
         });
-        setErrors({}); // Clear all errors
+        localStorage.removeItem('contactFormData');
+        setErrors({});
         // Auto-dismiss success message after 5 seconds
         setTimeout(() => setSubmitStatus(null), 5000);
       } else {
@@ -153,9 +202,28 @@ export function Contact() {
     }
   ];
 
+  const getCharacterCount = (field: keyof Omit<typeof formData, 'access_key'>) => {
+    const fieldMap = {
+      firstName: 2,
+      lastName: 2,
+      email: 0,
+      subject: 5,
+      message: 10
+    };
+    const minLength = fieldMap[field];
+    const currentLength = formData[field].length;
+    return { current: currentLength, min: minLength, isValid: currentLength >= minLength };
+  };
+
   return (
-    <section id="contact" className="py-24 bg-white dark:bg-transparent">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 bg-white dark:bg-transparent relative overflow-hidden">
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-20 left-20 w-80 h-80 bg-primary rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-secondary rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
           <p className="text-sm font-medium text-primary mb-2 tracking-wider uppercase">
             Contact
@@ -187,23 +255,32 @@ export function Contact() {
                 <a
                   key={info.label}
                   href={info.href}
-                  className="flex items-center space-x-4 p-4 rounded-xl bg-background/50 hover:bg-background/70 transition-all duration-300 hover:scale-105 group"
+                  className="flex items-center space-x-4 p-4 rounded-xl bg-background/50 hover:bg-background/70 transition-all duration-300 hover:scale-105 group relative overflow-hidden"
                 >
-                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors duration-300">
+                  <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors duration-300 relative z-10">
                     {info.icon}
                   </div>
-                  <div>
+                  <div className="relative z-10">
                     <p className="font-medium">{info.label}</p>
                     <p className="text-muted-foreground group-hover:text-foreground transition-colors duration-300">{info.value}</p>
                   </div>
                 </a>
               ))}
             </div>
+
+            {/* Auto-save indicator */}
+            {isTyping && (
+              <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+                <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                <span>Saving...</span>
+              </div>
+            )}
           </div>
 
-          <GlassCard className="border-0 shadow-xl">
-            <CardHeader>
-              <CardTitle className="text-xl font-semibold">
+          <GlassCard className="border-0 shadow-xl relative overflow-hidden">
+            <CardHeader className="relative z-10">
+              <CardTitle className="text-xl font-semibold flex items-center">
+                <Sparkles className="h-5 w-5 mr-2 text-primary" />
                 Send me a message
               </CardTitle>
               <CardDescription className="text-muted-foreground">
@@ -211,7 +288,8 @@ export function Contact() {
                 possible.
               </CardDescription>
             </CardHeader>
-            <CardContent>
+            <CardContent className="relative z-10">
+              
               {/* Status Messages */}
               {submitStatus === "success" && (
                 <div className="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200">
@@ -252,17 +330,8 @@ export function Contact() {
                           : 'focus:border-primary focus:ring-primary/20'
                       }`}
                       value={formData.firstName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, firstName: e.target.value })
-                      }
+                      onChange={(e) => handleFieldChange('firstName', e.target.value)}
                       disabled={isSubmitting}
-                      onBlur={() => {
-                        if (formData.firstName.trim() && formData.firstName.trim().length < 2) {
-                          setErrors({ ...errors, firstName: "First name must be at least 2 characters" });
-                        } else if (formData.firstName.trim()) {
-                          setErrors({ ...errors, firstName: undefined });
-                        }
-                      }}
                       aria-describedby={errors.firstName ? "firstName-error" : undefined}
                     />
                     {errors.firstName && (
@@ -271,6 +340,9 @@ export function Contact() {
                         {errors.firstName}
                       </p>
                     )}
+                    <div className="text-xs text-muted-foreground mt-1 text-right">
+                      {getCharacterCount('firstName').current}/{getCharacterCount('firstName').min} min
+                    </div>
                   </div>
                   <div>
                     <Input
@@ -281,17 +353,8 @@ export function Contact() {
                           : 'focus:border-primary focus:ring-primary/20'
                       }`}
                       value={formData.lastName}
-                      onChange={(e) =>
-                        setFormData({ ...formData, lastName: e.target.value })
-                      }
+                      onChange={(e) => handleFieldChange('lastName', e.target.value)}
                       disabled={isSubmitting}
-                      onBlur={() => {
-                        if (formData.lastName.trim() && formData.lastName.trim().length < 2) {
-                          setErrors({ ...errors, lastName: "Last name must be at least 2 characters" });
-                        } else if (formData.lastName.trim()) {
-                          setErrors({ ...errors, lastName: undefined });
-                        }
-                      }}
                       aria-describedby={errors.lastName ? "lastName-error" : undefined}
                     />
                     {errors.lastName && (
@@ -300,6 +363,9 @@ export function Contact() {
                         {errors.lastName}
                       </p>
                     )}
+                    <div className="text-xs text-muted-foreground mt-1 text-right">
+                      {getCharacterCount('lastName').current}/{getCharacterCount('lastName').min} min
+                    </div>
                   </div>
                 </div>
                 <div>
@@ -312,15 +378,8 @@ export function Contact() {
                         : 'focus:border-primary focus:ring-primary/20'
                     }`}
                     value={formData.email}
-                    onChange={handleEmailChange}
+                    onChange={(e) => handleFieldChange('email', e.target.value)}
                     disabled={isSubmitting}
-                    onBlur={() => {
-                      if (formData.email.trim() && !validateEmail(formData.email)) {
-                        setErrors({ ...errors, email: "Please enter a valid email address" });
-                      } else if (formData.email.trim()) {
-                        setErrors({ ...errors, email: undefined });
-                      }
-                    }}
                     aria-describedby={errors.email ? "email-error" : undefined}
                   />
                   {errors.email && (
@@ -330,11 +389,29 @@ export function Contact() {
                     </p>
                   )}
                 </div>
-                <Input
-                  placeholder="Subject"
-                  className="rounded-xl focus:border-primary focus:ring-primary/20 transition-all duration-200"
-                  disabled={isSubmitting}
-                />
+                <div>
+                  <Input
+                    placeholder="Subject"
+                    className={`rounded-xl transition-all duration-200 ${
+                      errors.subject 
+                        ? 'border-red-500 focus:border-red-500 focus:ring-red-500/20' 
+                        : 'focus:border-primary focus:ring-primary/20'
+                    }`}
+                    value={formData.subject}
+                    onChange={(e) => handleFieldChange('subject', e.target.value)}
+                    disabled={isSubmitting}
+                    aria-describedby={errors.subject ? "subject-error" : undefined}
+                  />
+                  {errors.subject && (
+                    <p id="subject-error" className="text-red-500 text-xs mt-1 flex items-center">
+                      <AlertCircle className="h-3 w-3 mr-1" />
+                      {errors.subject}
+                    </p>
+                  )}
+                  <div className="text-xs text-muted-foreground mt-1 text-right">
+                    {getCharacterCount('subject').current}/{getCharacterCount('subject').min} min
+                  </div>
+                </div>
                 <div>
                   <Textarea
                     placeholder="Your Message"
@@ -345,17 +422,8 @@ export function Contact() {
                         : 'focus:border-primary focus:ring-primary/20'
                     }`}
                     value={formData.message}
-                    onChange={(e) =>
-                      setFormData({ ...formData, message: e.target.value })
-                    }
+                    onChange={(e) => handleFieldChange('message', e.target.value)}
                     disabled={isSubmitting}
-                    onBlur={() => {
-                      if (formData.message.trim() && formData.message.trim().length < 10) {
-                        setErrors({ ...errors, message: "Message must be at least 10 characters" });
-                      } else if (formData.message.trim()) {
-                        setErrors({ ...errors, message: undefined });
-                      }
-                    }}
                     aria-describedby={errors.message ? "message-error" : undefined}
                   />
                   {errors.message && (
@@ -364,10 +432,13 @@ export function Contact() {
                       {errors.message}
                     </p>
                   )}
+                  <div className="text-xs text-muted-foreground mt-1 text-right">
+                    {getCharacterCount('message').current}/{getCharacterCount('message').min} min
+                  </div>
                 </div>
                 <Button 
                   type="submit" 
-                  className="w-full rounded-xl hover:scale-105 transition-transform duration-200" 
+                  className="w-full rounded-xl hover:scale-105 transition-transform duration-200 bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl" 
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? (
