@@ -12,6 +12,17 @@ export function Hero() {
   const [isTypingComplete, setIsTypingComplete] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  // Generate consistent particle data to prevent hydration errors
+  const particles = useMemo(() => {
+    return Array.from({ length: 20 }, (_, i) => ({
+      id: i,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      animationDelay: `${Math.random() * 3}s`,
+      animationDuration: `${3 + Math.random() * 4}s`
+    }));
+  }, []);
+
   const startTyping = useCallback(() => {
     let i = 0;
     const interval = setInterval(() => {
@@ -74,17 +85,17 @@ export function Hero() {
 
       {/* Particle effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(20)].map((_, i) => (
+        {particles.map((particle) => (
           <div
-            key={i}
+            key={particle.id}
             className={`absolute w-1 h-1 bg-emerald-400/30 rounded-full animate-float-slow ${
               isLoaded ? 'opacity-100' : 'opacity-0'
             }`}
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 4}s`
+              left: particle.left,
+              top: particle.top,
+              animationDelay: particle.animationDelay,
+              animationDuration: particle.animationDuration
             }}
           />
         ))}
@@ -125,7 +136,6 @@ export function Hero() {
                 Hi, I&apos;m{" "}
                 <span className="inline-block bg-gradient-to-r from-blue-400 via-emerald-600 to-teal-600 bg-clip-text text-transparent relative">
                   {displayed}
-                  <span className={`animate-blink ${isTypingComplete ? 'opacity-0' : 'opacity-100'}`}>|</span>
                   {/* Glow effect */}
                   <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-emerald-600 to-teal-600 blur-xl opacity-20 -z-10" />
                 </span>

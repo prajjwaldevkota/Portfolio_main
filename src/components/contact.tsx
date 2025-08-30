@@ -292,28 +292,28 @@ export function Contact() {
               
               {/* Status Messages */}
               {submitStatus === "success" && (
-                <div className="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-800 dark:text-green-200">
+                <div className="mb-6 p-4 rounded-lg bg-green-100 border border-green-300 text-green-900 dark:bg-green-900/30 dark:border-green-700 dark:text-green-100">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <CheckCircle className="h-5 w-5 text-green-400 dark:text-green-300" />
+                      <CheckCircle className="h-5 w-5 text-green-600 dark:text-green-400" />
                     </div>
                     <div className="ml-3">
-                      <p className="text-sm font-medium">Message sent successfully!</p>
-                      <p className="text-sm text-green-700 dark:text-green-300">Thank you for reaching out. I&apos;ll get back to you soon.</p>
+                      <p className="text-sm font-medium text-green-900 dark:text-green-100">Message sent successfully!</p>
+                      <p className="text-sm text-green-800 dark:text-green-200">Thank you for reaching out. I&apos;ll get back to you soon.</p>
                     </div>
                   </div>
                 </div>
               )}
 
               {submitStatus === "error" && (
-                <div className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200">
+                <div className="mb-6 p-4 rounded-lg bg-red-100 border border-red-300 text-green-900 dark:bg-red-900/20 dark:border-red-800 dark:text-red-200">
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
-                      <AlertCircle className="h-5 w-5 text-red-400 dark:text-red-300" />
+                      <AlertCircle className="h-5 w-5 text-red-600 dark:text-red-400" />
                     </div>
                     <div className="ml-3">
-                      <p className="text-sm font-medium">Failed to send message</p>
-                      <p className="text-sm text-red-700 dark:text-red-300">Please try again later or contact me directly via email.</p>
+                      <p className="text-sm font-medium text-red-900 dark:text-red-200">Failed to send message</p>
+                      <p className="text-sm text-red-800 dark:text-red-300">Please try again later or contact me directly via email.</p>
                     </div>
                   </div>
                 </div>
