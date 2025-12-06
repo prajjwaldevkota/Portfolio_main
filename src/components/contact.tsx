@@ -189,15 +189,9 @@ export function Contact() {
       href: "mailto:devkota.prj@gmail.com"
     },
     {
-      icon: <Phone className="h-5 w-5 text-primary" />,
-      label: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567"
-    },
-    {
       icon: <MapPin className="h-5 w-5 text-primary" />,
       label: "Location",
-      value: "London, ON",
+      value: "Toronto, ON",
       href: "#"
     }
   ];
