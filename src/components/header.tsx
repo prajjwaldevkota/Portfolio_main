@@ -50,12 +50,12 @@ export function Header() {
   return (
     <>
       <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-full max-w-3xl px-4">
-        <div className="relative bg-zinc-900/80 dark:bg-black/60 backdrop-blur-xl border border-white/20 dark:border-white/10 rounded-full shadow-lg shadow-black/10 dark:shadow-black/20 p-2 flex items-center justify-between transition-all duration-300">
+        <div className="relative bg-white/70 dark:bg-black/60 backdrop-blur-xl border border-white/40 dark:border-white/10 rounded-full shadow-lg shadow-zinc-800/5 dark:shadow-black/20 p-2 flex items-center justify-between transition-all duration-300">
           {/* Inner glow for depth */}
-          <div className="absolute inset-0 rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,0.2)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)] pointer-events-none" />
+          <div className="absolute inset-0 rounded-full shadow-[inset_0_0_0_1px_rgba(255,255,255,0.5)] dark:shadow-[inset_0_0_0_1px_rgba(255,255,255,0.1)] pointer-events-none" />
           <Link
             href="/"
-            className="relative z-10 px-4 font-bold tracking-tight text-white hover:text-white/80 transition-colors"
+            className="relative z-10 px-4 font-bold tracking-tight text-zinc-900 dark:text-white hover:text-zinc-700 dark:hover:text-white/80 transition-colors"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             aria-label="Go to top"
           >
@@ -74,8 +74,8 @@ export function Header() {
                 className={cn(
                   "rounded-full px-4 text-sm font-medium transition-all duration-300",
                   activeSection === item.id
-                    ? "bg-white/10 text-white shadow-sm"
-                    : "text-zinc-400 hover:text-white hover:bg-white/5"
+                    ? "bg-zinc-900 dark:bg-white/10 text-white shadow-sm"
+                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5"
                 )}
               >
                 {item.label}
