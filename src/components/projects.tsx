@@ -1,15 +1,14 @@
 "use client"
-import { GlassCard, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { ExternalLink, Github, Search, Filter, X } from "lucide-react"
 import Image from "next/image"
-import { useState, useEffect, useRef, useMemo } from "react"
+import { useState, useMemo } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
 export function Projects() {
-  const [visibleProjects, setVisibleProjects] = useState<number[]>([])
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState<string>("all")
   const [selectedDifficulty, setSelectedDifficulty] = useState<string>("all")
@@ -140,7 +139,7 @@ export function Projects() {
                 exit={{ opacity: 0, height: 0 }}
                 className="overflow-hidden"
               >
-                <div className="flex flex-wrap items-center justify-center gap-4 p-4 bg-background/50 backdrop-blur-sm rounded-xl border border-white/5">
+                <div className="flex flex-wrap items-center justify-center gap-4 p-4 bg-background/50 backdrop-blur-sm rounded-xl border border-zinc-200 dark:border-white/5">
                   <div className="flex items-center gap-2">
                     <span className="text-sm font-medium text-muted-foreground">Category:</span>
                     <div className="flex gap-2">
@@ -182,91 +181,93 @@ export function Projects() {
       </div>
 
       {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project, index) => (
-            <motion.div
-              layout
-              key={project.title}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 0.3 }}
-              className="group relative bg-card border border-zinc-200 dark:border-white/10 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-white/20 transition-colors duration-300"
-            >
-              {/* Image Area */}
-              <div className="aspect-video relative overflow-hidden bg-secondary/20">
-                <Image
-                  src={project.image || "/placeholder.svg"}
-                  alt={project.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
-                  <Button
-                    size="sm"
-                    variant="secondary"
-                    className="rounded-full bg-white text-black hover:bg-white/90"
-                    onClick={() => window.open(project.liveUrl, '_blank')}
-                    aria-label={`View live demo of ${project.title}`}
-                  >
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Live Demo
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="rounded-full border-white/20 text-white hover:bg-white/10"
-                    onClick={() => window.open(project.githubUrl, '_blank')}
-                    aria-label={`View source code of ${project.title}`}
-                  >
-                    <Github className="h-4 w-4 mr-2" />
-                    Code
-                  </Button>
-                </div>
-              </div>
-
-              {/* Content Area */}
-              <div className="p-6 space-y-4">
-                <div className="flex justify-between items-start">
-                  <div>
-                    <h3 className="text-xl font-bold text-foreground mb-1">{project.title}</h3>
-                    <p className="text-sm text-muted-foreground line-clamp-2">{project.description}</p>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project, index) => (
+              <motion.div
+                layout
+                key={project.title}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                className="group relative bg-card border border-zinc-200 dark:border-zinc-700 rounded-xl overflow-hidden hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors duration-300"
+              >
+                {/* Image Area */}
+                <div className="aspect-video relative overflow-hidden bg-secondary/20">
+                  <Image
+                    src={project.image || "/placeholder.svg"}
+                    alt={project.title}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      className="rounded-full bg-white text-black hover:bg-white/90"
+                      onClick={() => window.open(project.liveUrl, '_blank')}
+                      aria-label={`View live demo of ${project.title}`}
+                    >
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Live Demo
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="rounded-full border-white/20 text-white hover:bg-white/10"
+                      onClick={() => window.open(project.githubUrl, '_blank')}
+                      aria-label={`View source code of ${project.title}`}
+                    >
+                      <Github className="h-4 w-4 mr-2" />
+                      Code
+                    </Button>
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.slice(0, 3).map((tag) => ( // Changed from project.tags to project.technologies
-                    <Badge key={tag} variant="secondary" className="bg-secondary/50 text-xs font-normal text-muted-foreground border-0">
-                      {tag}
-                    </Badge>
-                  ))}
-                  {project.technologies.length > 3 && ( // Changed from project.tags to project.technologies
-                    <Badge variant="secondary" className="bg-secondary/50 text-xs font-normal text-muted-foreground border-0">
-                      +{project.technologies.length - 3}
-                    </Badge>
-                  )}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
+                {/* Content Area */}
+                <div className="p-6 space-y-4">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="text-xl font-bold text-foreground mb-1">{project.title}</h3>
+                      <p className="text-sm text-muted-foreground line-clamp-2">{project.description}</p>
+                    </div>
+                  </div>
 
-      {filteredProjects.length === 0 && (
-        <div className="text-center py-20">
-          <p className="text-muted-foreground text-lg">No projects found matching your criteria.</p>
-          <Button
-            variant="link"
-            onClick={() => { setSearchTerm(""); setSelectedCategory("all"); }}
-            className="mt-2 text-foreground"
-          >
-            Clear filters
-          </Button>
+                  <div className="flex flex-wrap gap-2">
+                    {project.technologies.slice(0, 3).map((tag) => ( // Changed from project.tags to project.technologies
+                      <Badge key={tag} variant="secondary" className="bg-secondary/50 text-xs font-normal text-muted-foreground border-0">
+                        {tag}
+                      </Badge>
+                    ))}
+                    {project.technologies.length > 3 && ( // Changed from project.tags to project.technologies
+                      <Badge variant="secondary" className="bg-secondary/50 text-xs font-normal text-muted-foreground border-0">
+                        +{project.technologies.length - 3}
+                      </Badge>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
-      )}
+
+        {filteredProjects.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-muted-foreground text-lg">No projects found matching your criteria.</p>
+            <Button
+              variant="link"
+              onClick={() => { setSearchTerm(""); setSelectedCategory("all"); }}
+              className="mt-2 text-foreground"
+            >
+              Clear filters
+            </Button>
+          </div>
+        )}
+      </div>
     </section>
   )
 }

@@ -68,7 +68,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="relative w-24 h-24 mx-auto rounded-full overflow-hidden ring-2 ring-white/10 shadow-2xl"
+            className="relative w-24 h-24 mx-auto rounded-full overflow-hidden ring-2 ring-zinc-200 dark:ring-white/10 shadow-2xl"
           >
             <Image
               src="/memoji.png"

@@ -147,7 +147,7 @@ export function Skills() {
 
           {/* Filter Options */}
           {showFilters && (
-            <div className="flex flex-wrap items-center justify-center gap-4 p-4 bg-background rounded-xl border">
+            <div className="flex flex-wrap items-center justify-center gap-4 p-4 bg-background rounded-xl border border-zinc-200 dark:border-white/10">
               <div className="flex gap-2">
                 {categories.map((category) => (
                   <Button
@@ -180,8 +180,8 @@ export function Skills() {
                   skillRefs.current[index] = el;
                 }}
                 className={`transition-all duration-700 ease-out ${visibleSkills.includes(index)
-                    ? 'opacity-100 translate-y-0'
-                    : 'opacity-0 translate-y-8'
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-8'
                   }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
@@ -203,7 +203,7 @@ export function Skills() {
                         <Badge
                           key={skillIndex}
                           variant="outline"
-                          className="text-xs font-medium bg-white/50 hover:bg-white dark:bg-transparent dark:hover:bg-white/10 hover:scale-105 transition-all duration-200 hover:border-primary/30"
+                          className="text-xs font-medium bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 hover:scale-105 transition-all duration-200 border-zinc-200 dark:border-zinc-700 hover:border-primary/30"
                         >
                           {skill}
                         </Badge>

@@ -225,7 +225,7 @@ export function Contact() {
         </div>
 
         <div className="max-w-xl mx-auto">
-          <div className="bg-card border border-white/5 rounded-2xl p-8 shadow-2xl">
+          <div className="bg-card border border-zinc-200 dark:border-white/5 rounded-2xl p-8 shadow-2xl dark:shadow-black/30">
             {/* Status Messages */}
             {submitStatus === "success" && (
               <div className="mb-6 p-4 rounded-lg bg-green-500/10 border border-green-500/20 text-green-500 flex items-center gap-3">
@@ -247,7 +247,7 @@ export function Contact() {
                   <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">First Name</label>
                   <Input
                     placeholder="John"
-                    className="bg-secondary/50 border-white/5 focus:border-white/20 transition-all"
+                    className="bg-secondary/50 border-zinc-200 dark:border-white/5 focus:border-zinc-400 dark:focus:border-white/20 transition-all"
                     value={formData.firstName}
                     onChange={(e) => handleFieldChange('firstName', e.target.value)}
                     disabled={isSubmitting}
@@ -258,7 +258,7 @@ export function Contact() {
                   <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Last Name</label>
                   <Input
                     placeholder="Doe"
-                    className="bg-secondary/50 border-white/5 focus:border-white/20 transition-all"
+                    className="bg-secondary/50 border-zinc-200 dark:border-white/5 focus:border-zinc-400 dark:focus:border-white/20 transition-all"
                     value={formData.lastName}
                     onChange={(e) => handleFieldChange('lastName', e.target.value)}
                     disabled={isSubmitting}
@@ -272,7 +272,7 @@ export function Contact() {
                 <Input
                   type="email"
                   placeholder="john@example.com"
-                  className="bg-secondary/50 border-white/5 focus:border-white/20 transition-all"
+                  className="bg-secondary/50 border-zinc-200 dark:border-white/5 focus:border-zinc-400 dark:focus:border-white/20 transition-all"
                   value={formData.email}
                   onChange={(e) => handleFieldChange('email', e.target.value)}
                   disabled={isSubmitting}
@@ -284,7 +284,7 @@ export function Contact() {
                 <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">Subject</label>
                 <Input
                   placeholder="Project Inquiry"
-                  className="bg-secondary/50 border-white/5 focus:border-white/20 transition-all"
+                  className="bg-secondary/50 border-zinc-200 dark:border-white/5 focus:border-zinc-400 dark:focus:border-white/20 transition-all"
                   value={formData.subject}
                   onChange={(e) => handleFieldChange('subject', e.target.value)}
                   disabled={isSubmitting}
@@ -297,7 +297,7 @@ export function Contact() {
                 <Textarea
                   placeholder="Tell me about your project..."
                   rows={5}
-                  className="bg-secondary/50 border-white/5 focus:border-white/20 transition-all resize-none"
+                  className="bg-secondary/50 border-zinc-200 dark:border-white/5 focus:border-zinc-400 dark:focus:border-white/20 transition-all resize-none"
                   value={formData.message}
                   onChange={(e) => handleFieldChange('message', e.target.value)}
                   disabled={isSubmitting}

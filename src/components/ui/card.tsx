@@ -90,9 +90,9 @@ const GlassCard = React.forwardRef<
     viewport={{ once: true, amount: 0.2 }}
     transition={{ duration: 0.6, ease: "easeOut" }}
     className={cn(
-      "group relative rounded-3xl border border-zinc-200 bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden",
-      "dark:bg-zinc-900/60 dark:border-white/10 dark:shadow-black/40",
-      "hover:shadow-xl hover:bg-white dark:hover:bg-zinc-900/70 transition-all duration-300",
+      "group relative rounded-3xl border", "border-zinc-200 bg-white/90 backdrop-blur-xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden",
+      "dark:bg-zinc-900 dark:border-zinc-700 dark:shadow-black/40",
+      "hover:shadow-xl hover:bg-white dark:hover:bg-zinc-800 transition-all duration-300",
       "text-card-foreground",
       className
     )}

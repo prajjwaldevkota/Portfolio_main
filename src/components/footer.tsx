@@ -41,7 +41,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="relative border-t border-border/50 bg-background/50 backdrop-blur-md rounded-t-2xl shadow-lg dark:border-white/10 dark:bg-black/20 py-16 overflow-hidden">
+    <footer className="relative border-t border-zinc-200 dark:border-zinc-800 bg-background/80 backdrop-blur-md py-16 overflow-hidden">
       {/* Background decorative elements */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 left-1/4 w-64 h-64 bg-primary rounded-full blur-3xl" />
@@ -53,7 +53,7 @@ export function Footer() {
           {/* Main content */}
           <div className="text-center space-y-6">
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-emerald-600 to-blue-600 bg-clip-text text-transparent">
+              <h3 className="text-2xl font-bold text-foreground">
                 Let&apos;s Connect
               </h3>
               <p className="text-muted-foreground max-w-md mx-auto">
@@ -140,11 +140,10 @@ export function Footer() {
       <Button
         onClick={scrollToTop}
         size="icon"
-        className={`fixed bottom-8 right-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 bg-gradient-to-r from-emerald-500 to-blue-500 hover:from-emerald-600 hover:to-blue-600 text-white ${
-          showScrollTop 
-            ? 'opacity-100 translate-y-0' 
-            : 'opacity-0 translate-y-10 pointer-events-none'
-        }`}
+        className={`fixed bottom-8 right-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 z-50 bg-foreground text-background hover:bg-foreground/90 ${showScrollTop
+          ? 'opacity-100 translate-y-0'
+          : 'opacity-0 translate-y-10 pointer-events-none'
+          }`}
       >
         <ArrowUp className="h-4 w-4" />
       </Button>
