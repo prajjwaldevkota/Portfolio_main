@@ -127,10 +127,7 @@ export function Footer() {
           {/* Copyright */}
           <div className="text-center space-y-4 pt-8 border-t border-border/30 w-full">
             <p className="text-muted-foreground flex items-center justify-center gap-2">
-              © 2025 Prajjwal Devkota. All rights reserved.
-            </p>
-            <p className="text-sm text-muted-foreground/60 flex items-center justify-center gap-2">
-              Built with <Heart className="h-4 w-4 text-red-500 animate-pulse" /> using Next.js, Tailwind CSS, and shadcn/ui
+              © 2026 Prajjwal Devkota. All rights reserved.
             </p>
           </div>
         </div>
