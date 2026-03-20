@@ -1,126 +1,113 @@
-import {
-  GlassCard,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { CalendarDays, MapPin } from "lucide-react";
+"use client"
+
+import { motion } from "framer-motion"
+
+const experiences = [
+  {
+    title: "Help Desk Analyst",
+    company: "Bond Brand Loyalty",
+    location: "Toronto, Ontario",
+    type: "Full-Time",
+    period: "Sept 2025 - Present",
+    description:
+      "Providing technical support and resolving issues for internal employees, managing tickets, and ensuring smooth IT operations.",
+    highlights: [
+      "Providing Tier 1/2 technical support across the organization",
+      "Managing and resolving IT service tickets efficiently using Ivanti",
+    ],
+  },
+  {
+    title: "IT Support Analyst",
+    company: "EMCO Corporation",
+    location: "London, Ontario",
+    type: "Co-op",
+    period: "May 2024 - Aug 2024",
+    description:
+      "Provided Tier 1/2 technical support to a hybrid workforce of 500+ users across multiple branches. Diagnosed and resolved hardware, software, and connectivity issues in a Microsoft 365 environment.",
+    highlights: [
+      "Deployed and configured devices using Intune and Autopilot",
+      "Automated compliance tasks with PowerShell scripting",
+      "Created and maintained internal SOPs and knowledge base articles",
+    ],
+  },
+  {
+    title: "IT Support Assistant",
+    company: "Ministry of Solicitor General",
+    location: "London, Ontario",
+    type: "Co-op",
+    period: "Jan 2023 - May 2023",
+    description:
+      "Delivered frontline technical support to staff across multiple departments, resolving day-to-day issues including user access, printer troubleshooting, and system imaging.",
+    highlights: [
+      "Managed device setup and imaging, account provisioning via Active Directory",
+      "Supported patching and security enforcement through Intune",
+    ],
+  },
+]
 
 export function Experience() {
-  const experiences = [
-    {
-      title: "Help Desk Analyst",
-      company: "Bond Brand Loyalty",
-      location: "Toronto, Ontario",
-      period: "Sept 2025 - Current",
-      description: "Providing technical support and resolving issues for internal employees, managing tickets, and ensuring smooth IT operations.",
-      technologies: ["Technical Support", "Troubleshooting", "Active Directory", "Ivanti", "eDiscovery", "Entra ID"]
-    },
-    {
-      title: "IT Support Analyst",
-      company: "EMCO",
-      location: "London, Ontario, Canada",
-      period: "2024 May - 2024 August",
-      description:
-        "Provided Tier 1/2 technical support to a hybrid workforce of 500+ users across multiple branches. Diagnosed and resolved hardware, software, and connectivity issues in a Microsoft 365 environment using ServiceNow. Deployed and configured new devices using Intune and Autopilot, and supported compliance by executing patch audits and PowerShell automation. Created and updated internal documentation (SOPs, KBs), promoted First Call Resolution (FCR), and collaborated with senior teams on device lifecycle management and root cause analysis.",
-      technologies: [
-        "Windows 11",
-        "Microsoft 365",
-        "Intune",
-        "Autopilot",
-        "Ivanti",
-        "PowerShell",
-        "Active Directory",
-        "Entra ID",
-        "DNS/DHCP",
-        "VPN",
-        "Endpoint Compliance",
-        "Asset Management",
-        "Remote Desktop",
-      ],
-    },
-    {
-      title: "IT Support Assistant",
-      company: "Ministry of Solicitor General",
-      location: "London, Ontario, Canada",
-      period: "2023 Jan - 2023 May",
-      description:
-        "Delivered frontline technical support to staff across multiple departments, resolving day-to-day issues including user access, printer troubleshooting, and system imaging. Managed device setup and imaging using USB sticks and performed account provisioning via Active Directory. Handled inventory updates and supported patching and security enforcement through Intune. Logged and escalated tickets using internal helpdesk tools while maintaining accuracy in documentation and communication.",
-      technologies: [
-        "Windows",
-        "AV/Crestron",
-        "Network",
-        "Hardware",
-        "VNC",
-        "Active Directory",
-        "Entra ID",
-        "Office 365",
-        "Intune",
-        "PowerShell",
-        "Remote Desktop",
-        "Asset Management",
-        "Patching",
-        "Security",
-      ],
-    },
-  ];
-
   return (
-    <section id="experience" className="py-20 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Work Experience
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            My professional journey and the experiences that have shaped my
-            career
-          </p>
-        </div>
+    <section id="experience" className="py-24 relative">
+      <div className="max-w-5xl mx-auto px-6">
+        <p className="section-label mb-12">EXPERIENCE</p>
 
-        <div className="max-w-4xl mx-auto space-y-6">
-          {experiences.map((experience, index) => (
-            <GlassCard key={index} className="relative overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
-              <CardHeader className="relative z-10">
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-                  <div>
-                    <CardTitle className="text-xl">
-                      {experience.title}
-                    </CardTitle>
-                    <CardDescription className="text-lg font-medium text-primary">
-                      {experience.company}
-                    </CardDescription>
-                  </div>
-                  <div className="flex flex-col sm:items-end gap-1">
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <CalendarDays className="h-4 w-4 mr-1" />
-                      {experience.period}
+        <div className="max-w-3xl relative">
+          {/* Timeline line */}
+          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-zinc-800" />
+
+          <div className="space-y-10">
+            {experiences.map((exp, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                viewport={{ once: true }}
+                className="relative pl-8"
+              >
+                {/* Timeline dot */}
+                <div className="absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2 border-zinc-700 bg-black z-10" />
+
+                {/* Card */}
+                <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-6 space-y-4">
+                  {/* Header */}
+                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+                    <div>
+                      <h3 className="text-lg font-semibold text-zinc-100">{exp.title}</h3>
+                      <p className="text-sm text-zinc-400">
+                        {exp.company}
+                        <span className="text-zinc-600 mx-2">·</span>
+                        {exp.location}
+                      </p>
                     </div>
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <MapPin className="h-4 w-4 mr-1" />
-                      {experience.location}
+                    <div className="flex items-center gap-2 shrink-0">
+                      <span className="text-xs px-2 py-0.5 rounded-md bg-zinc-800/80 text-zinc-500 border border-zinc-700/50">
+                        {exp.type}
+                      </span>
+                      <span className="text-sm text-zinc-500 font-mono">{exp.period}</span>
                     </div>
                   </div>
+
+                  {/* Description */}
+                  <p className="text-sm text-zinc-500 leading-relaxed">
+                    {exp.description}
+                  </p>
+
+                  {/* Highlights */}
+                  <ul className="space-y-1.5">
+                    {exp.highlights.map((highlight, hi) => (
+                      <li key={hi} className="flex items-start gap-2 text-sm text-zinc-400">
+                        <span className="text-zinc-600 mt-1.5 shrink-0">•</span>
+                        {highlight}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-4 relative z-10">
-                <p className="text-muted-foreground">
-                  {experience.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {experience.technologies.map((tech, techIndex) => (
-                    <Badge key={techIndex} variant="outline" className="bg-white hover:bg-zinc-50 dark:bg-transparent dark:hover:bg-white/10 transition-colors border-zinc-200 dark:border-white/20">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </GlassCard>
-          ))}
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
-  );
+  )
 }

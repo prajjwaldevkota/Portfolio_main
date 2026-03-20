@@ -1,16 +1,18 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Outfit, Plus_Jakarta_Sans } from "next/font/google"
+import { Inter } from "next/font/google"
+import { GeistMono } from "geist/font/mono"
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { Cursor } from "@/components/ui/cursor"
 
-const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" })
-const plusJakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" })
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
-  title: "Prajjwal Devkota - Portfolio",
-  description: "Full Stack Developer crafting exceptional digital experiences with modern technologies. Specializing in React, TypeScript, Node.js, and Python.",
+  title: "Prajjwal Devkota — Full-Stack Developer",
+  description: "Full-Stack Developer specializing in React, TypeScript, Node.js, and Python. View portfolio, explore projects, and get in touch.",
   keywords: [
     "Full Stack Developer",
     "React Developer",
@@ -37,15 +39,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://devkotaprajjwal.com.np",
-    title: "Prajjwal Devkota - Full Stack Developer Portfolio",
-    description: "Full Stack Developer crafting exceptional digital experiences with modern technologies.",
+    title: "Prajjwal Devkota — Full-Stack Developer",
+    description: "Full-Stack Developer crafting exceptional digital experiences with modern technologies.",
     siteName: "Prajjwal Devkota Portfolio",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Prajjwal Devkota - Full Stack Developer",
+        alt: "Prajjwal Devkota — Full-Stack Developer",
       },
     ],
   },
@@ -60,9 +62,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    google: "your-google-verification-code",
-  },
 }
 
 export default function RootLayout({
@@ -71,20 +70,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark">
       <head>
         <link rel="icon" href="/logo.svg" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <meta name="theme-color" content="#000000" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className={`${outfit.variable} ${plusJakarta.variable} font-sans antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Cursor />
-          {children}
-        </ThemeProvider>
+      <body className={`${inter.variable} ${GeistMono.variable} font-sans antialiased bg-black text-zinc-100`}>
+        {children}
       </body>
     </html>
   )
