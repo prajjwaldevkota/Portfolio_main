@@ -1,7 +1,3 @@
-"use client"
-
-import { motion } from "framer-motion"
-
 const experiences = [
   {
     title: "Help Desk Analyst",
@@ -10,10 +6,14 @@ const experiences = [
     type: "Full-Time",
     period: "Sept 2025 - Present",
     description:
-      "Providing technical support and resolving issues for internal employees, managing tickets, and ensuring smooth IT operations.",
+      "Supporting Toronto office IT, resolving Ivanti service requests, and working with the analytics team on cloud development and automation.",
     highlights: [
-      "Providing Tier 1/2 technical support across the organization",
-      "Managing and resolving IT service tickets efficiently using Ivanti",
+      "Working with the analytics team to migrate a project from Hugging Face to Azure.",
+      "Developing Azure Functions and CI/CD workflows to automate deployments.",
+      "Building Python and PowerShell scripts with Microsoft Graph and REST APIs to automate repetitive administrative tasks and user onboarding/offboarding.",
+      "Using AI developer tools to build internal diagnostic tools and streamline ticket triage.",
+      "Integrating Reclaim AI with Microsoft 365 through SCIM provisioning and directory synchronization, and managing application access in Entra ID.",
+      "Managing macOS devices with Jamf Pro, including software packaging, configuration profiles, FileVault encryption, and Jamf Protect.",
     ],
   },
   {
@@ -45,68 +45,25 @@ const experiences = [
   },
 ]
 
+
 export function Experience() {
   return (
-    <section id="experience" className="py-24 relative">
-      <div className="max-w-5xl mx-auto px-6">
-        <p className="section-label mb-12">EXPERIENCE</p>
-
-        <div className="max-w-3xl relative">
-          {/* Timeline line */}
-          <div className="absolute left-[7px] top-2 bottom-2 w-px bg-zinc-800" />
-
-          <div className="space-y-10">
-            {experiences.map((exp, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                viewport={{ once: true }}
-                className="relative pl-8"
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-0 top-1.5 w-[15px] h-[15px] rounded-full border-2 border-zinc-700 bg-black z-10" />
-
-                {/* Card */}
-                <div className="rounded-xl border border-zinc-800 bg-zinc-900/30 p-6 space-y-4">
-                  {/* Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                    <div>
-                      <h3 className="text-lg font-semibold text-zinc-100">{exp.title}</h3>
-                      <p className="text-sm text-zinc-400">
-                        {exp.company}
-                        <span className="text-zinc-600 mx-2">·</span>
-                        {exp.location}
-                      </p>
-                    </div>
-                    <div className="flex items-center gap-2 shrink-0">
-                      <span className="text-xs px-2 py-0.5 rounded-md bg-zinc-800/80 text-zinc-500 border border-zinc-700/50">
-                        {exp.type}
-                      </span>
-                      <span className="text-sm text-zinc-500 font-mono">{exp.period}</span>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-sm text-zinc-500 leading-relaxed">
-                    {exp.description}
-                  </p>
-
-                  {/* Highlights */}
-                  <ul className="space-y-1.5">
-                    {exp.highlights.map((highlight, hi) => (
-                      <li key={hi} className="flex items-start gap-2 text-sm text-zinc-400">
-                        <span className="text-zinc-600 mt-1.5 shrink-0">•</span>
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+    <section id="experience" aria-labelledby="experience-heading" className="section">
+      <h2 id="experience-heading" className="section-heading">Experience</h2>
+      <div className="space-y-9">
+        {experiences.map((exp) => (
+          <article key={exp.company} className="grid gap-2 sm:grid-cols-[155px_1fr] sm:gap-7">
+            <p className="text-xs leading-7 text-muted">{exp.period}</p>
+            <div>
+              <h3 className="font-medium text-foreground">{exp.title}</h3>
+              <p className="mt-1 text-sm text-body">{exp.company} · {exp.type}</p>
+              <p className="mt-3 text-sm leading-7 text-body">{exp.description}</p>
+              <ul className="mt-3 list-disc space-y-1 pl-4 text-sm leading-6 text-body marker:text-muted">
+                {exp.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   )
