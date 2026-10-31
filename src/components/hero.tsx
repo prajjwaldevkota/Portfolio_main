@@ -18,7 +18,7 @@ export function Hero() {
         <a href="#projects" className="primary-link">
           View my work <ArrowDown size={15} aria-hidden="true" />
         </a>
-        <a href="/Resume.pdf" target="_blank" rel="noopener noreferrer" className="text-link">
+        <a href="/PrajjwalDevkota_resume.pdf" target="_blank" rel="noopener noreferrer" className="text-link">
           Résumé <ArrowUpRight size={15} aria-hidden="true" />
         </a>
       </div>
